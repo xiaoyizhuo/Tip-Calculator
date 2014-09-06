@@ -10,6 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
                             
+    @IBOutlet var labelCheckAmount: UILabel!
+    @IBOutlet var labelTip: UILabel!
+    @IBOutlet var labelTotalAmount: UILabel!
+    
+    @IBOutlet var labelPct: UILabel!
+    
+    @IBOutlet var sliderTipPct: UISlider!
+    
     @IBOutlet var btnClear: UIButton!
     @IBOutlet var btnDel: UIButton!
     @IBOutlet var btnDot: UIButton!
@@ -39,8 +47,9 @@ class ViewController: UIViewController {
         btn9.layer.borderWidth = 0.3
         btnClear.layer.borderWidth = 0.3
         btnDel.layer.borderWidth = 0.3
+//        btnDel.setTitle("\u{1F496}", forState: normal)
         btnDot.layer.borderWidth = 0.3
-        self.navigationController.navigationBar.hidden = true
+        self.navigationController!.navigationBar.hidden = true
         
     }
 
@@ -48,7 +57,132 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func updateData() {
+        var res = calculateTipsAndTotalAmount()
+        labelTip.text = String(format: "%0.2f", res.tips)
+        labelTotalAmount.text = String(format: "%0.2f", res.amount)
+    }
+    
+    func calculateTipsAndTotalAmount() -> (tips:Double, amount:Double) {
+        var str = NSString(string: labelCheckAmount.text!)
+        var amount = str.doubleValue;
 
-
+        var strPct = NSString(string: labelPct.text!.substringToIndex(advance(labelPct.text!.startIndex, countElements(labelPct.text!) - 1)))
+        var pct:Double = strPct.doubleValue / 100.0;
+        println(pct)
+        
+        var tips = amount * pct;
+        var totalAmount = amount + tips;
+        
+        return (tips, totalAmount)
+    }
+    
+    func addCheckAmount(num:String) {
+        if (countElements(labelCheckAmount.text!) > 5) {
+            return;
+        }
+        if (num == "0") {
+            if (labelCheckAmount.text! != "0") {
+                labelCheckAmount.text! += num;
+            }
+        }
+        else {
+            if (labelCheckAmount.text! != "0") {
+                labelCheckAmount.text! += num;
+            }
+            else {
+                labelCheckAmount.text! = num;
+            }
+            
+        }
+        
+        updateData()
+    }
+    
+    func hasDot(str: String) -> Bool {
+        for character in str {
+            if character == "." {
+                return true;
+            }
+        }
+        return false
+    }
+    
+    @IBAction func zeroBtnTouched(sender: UIButton) {
+        addCheckAmount("0")
+    }
+    
+    @IBAction func oneBtnTouched(sender: UIButton) {
+        addCheckAmount("1")
+    }
+    
+    @IBAction func twoBtnTouched(sender: UIButton) {
+        addCheckAmount("2")
+    }
+    
+    @IBAction func threeBtnTouched(sender: UIButton) {
+        addCheckAmount("3")
+    }
+    
+    @IBAction func fourBtnTouched(sender: UIButton) {
+        addCheckAmount("4")
+    }
+    
+    @IBAction func fiveBtnTouched(sender: UIButton) {
+        addCheckAmount("5")
+    }
+    
+    @IBAction func sixBtnTouched(sender: UIButton) {
+        addCheckAmount("6")
+    }
+    
+    @IBAction func sevenBtnTouched(sender: UIButton) {
+        addCheckAmount("7")
+    }
+    
+    @IBAction func eightBtnTouched(sender: UIButton) {
+        addCheckAmount("8")
+    }
+    
+    @IBAction func nineBtnTouched(sender: UIButton) {
+        addCheckAmount("9")
+    }
+    
+    @IBAction func dotBtnTouched(sender: UIButton) {
+        if (countElements(labelCheckAmount.text!) > 5) {
+            return;
+        }
+        
+        if !hasDot(labelCheckAmount.text!) {
+            labelCheckAmount.text! += ".";
+        }
+    }
+    
+    @IBAction func backspaceBtnTouched(sender: UIButton) {
+        var length = countElements(labelCheckAmount.text!);
+        println(length)
+        if length > 1 {
+            labelCheckAmount.text! = labelCheckAmount.text!.substringToIndex(advance(labelCheckAmount.text!.startIndex, countElements(labelCheckAmount.text!) - 1))
+        }
+        else {
+            labelCheckAmount.text! = "0"
+        }
+        updateData()
+    }
+    
+    @IBAction func cleanBtnTouched(sender: UIButton) {
+        labelCheckAmount.text = "0";
+        var res = calculateTipsAndTotalAmount()
+        labelTip.text = String(format: "%0.2f", res.tips)
+        labelTotalAmount.text = String(format: "%0.2f", res.amount)
+    }
+    
+    
+    @IBAction func sliderTouched(sender: UISlider) {
+        labelPct.text = String(format: "%0.0f%%", sliderTipPct.value);
+        updateData();
+    }
+    
 }
 
