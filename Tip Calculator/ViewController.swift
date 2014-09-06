@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         btnClear.layer.borderWidth = 0.3
         btnDel.layer.borderWidth = 0.3
         btnDot.layer.borderWidth = 0.3
-        self.navigationController.navigationBar.hidden = true
+        self.navigationController!.navigationBar.hidden = true
         
     }
 

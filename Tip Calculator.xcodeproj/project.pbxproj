@@ -395,6 +395,7 @@
 				CC03CA2119BA5C89007BFA63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CC03CA2219BA5C89007BFA63 /* Build configuration list for PBXNativeTarget "Tip CalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -403,6 +404,7 @@
 				CC03CA2419BA5C89007BFA63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
