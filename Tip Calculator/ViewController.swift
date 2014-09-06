@@ -47,7 +47,6 @@ class ViewController: UIViewController {
         btn9.layer.borderWidth = 0.3
         btnClear.layer.borderWidth = 0.3
         btnDel.layer.borderWidth = 0.3
-//        btnDel.setTitle("\u{1F496}", forState: normal)
         btnDot.layer.borderWidth = 0.3
         self.navigationController!.navigationBar.hidden = true
         
@@ -70,7 +69,6 @@ class ViewController: UIViewController {
 
         var strPct = NSString(string: labelPct.text!.substringToIndex(advance(labelPct.text!.startIndex, countElements(labelPct.text!) - 1)))
         var pct:Double = strPct.doubleValue / 100.0;
-        println(pct)
         
         var tips = amount * pct;
         var totalAmount = amount + tips;
@@ -161,7 +159,6 @@ class ViewController: UIViewController {
     
     @IBAction func backspaceBtnTouched(sender: UIButton) {
         var length = countElements(labelCheckAmount.text!);
-        println(length)
         if length > 1 {
             labelCheckAmount.text! = labelCheckAmount.text!.substringToIndex(advance(labelCheckAmount.text!.startIndex, countElements(labelCheckAmount.text!) - 1))
         }
